@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}History{% endblock %}
+
+
+{% block content %}
+
+<div class="container mt-4">
+
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+
+        <h2>
+            🕒 Recommendation History
+        </h2>
+
+
+        <a href="/" class="btn btn-secondary">
+            ⬅ Home
+        </a>
+
+
+    </div>
+
+
+
+
+
+    {% if history %}
+
+
+
+    <div class="row">
+
+
+    {% for item in history %}
+
+
+
+        <div class="col-md-6 mb-3">
+
+
+            <div class="history-card">
+
+
+                <div>
+
+
+                    <h5 class="mb-1">
+
+                        🎬 {{ item.searched_movie }}
+
+                    </h5>
+
+
+                    <small class="text-muted">
+
+                        Search ID: {{ item._id }}
+
+                    </small>
+
+
+                </div>
+
+
+
+
+
+                <a href="/delete-history/{{ item._id }}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Delete this history?')">
+
+
+                    🗑 Delete
+
+
+                </a>
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+    {% endfor %}
+
+
+    </div>
+
+
+
+    {% else %}
+
+
+
+    <div class="alert alert-info">
+
+
+        No recommendation history found.
+
+
+    </div>
+
+
+
+    {% endif %}
+
+
+
+</div>
+
+
+
+
+
+<style>
+
+
+.history-card{
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px;
+
+
+    border-radius:15px;
+
+
+    background:rgba(255,255,255,0.12);
+
+
+    backdrop-filter:blur(10px);
+
+
+    box-shadow:0 5px 20px rgba(0,0,0,0.15);
+
+
+    transition:0.3s;
+
+
+}
+
+
+
+.history-card:hover{
+
+
+    transform:translateY(-5px);
+
+
+}
+
+
+
+@media(max-width:576px){
+
+
+.history-card{
+
+
+    flex-direction:column;
+
+    gap:15px;
+
+    align-items:flex-start;
+
+
+}
+
+
+}
+
+
+</style>
+
+
+
+{% endblock %}

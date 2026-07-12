@@ -1,0 +1,1215 @@
+/* ===========================
+   GOOGLE FONT
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+
+}
+
+
+
+body{
+
+    background:#0f172a;
+
+    color:white;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+}
+
+
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+
+.navbar{
+
+    background:#111827 !important;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.4);
+
+}
+
+
+.navbar-brand{
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+
+
+.nav-link{
+
+    color:white !important;
+
+    transition:.3s;
+
+}
+
+
+.nav-link:hover{
+
+    color:#38bdf8 !important;
+
+}
+
+
+
+
+/* ===========================
+   CONTAINER ANIMATION
+=========================== */
+
+
+.container{
+
+    animation:fadeIn .6s ease;
+
+}
+
+
+
+
+/* ===========================
+   GLASS CARD
+=========================== */
+
+
+.card,
+.movie-card,
+.movie-glass-card,
+.favorite-card,
+.history-card{
+
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    color:white;
+
+    transition:.4s ease;
+
+
+}
+
+
+
+.card:hover,
+.movie-card:hover,
+.movie-glass-card:hover,
+.favorite-card:hover,
+.history-card:hover{
+
+
+    transform:translateY(-8px);
+
+    box-shadow:
+
+    0 15px 35px rgba(56,189,248,.25);
+
+
+}
+
+
+
+
+/* ===========================
+   MOVIE IMAGE
+=========================== */
+
+
+.movie-image,
+.movie-card img{
+
+
+    width:100%;
+
+    height:350px;
+
+    object-fit:cover;
+
+
+}
+
+
+
+
+
+/* ===========================
+   BUTTON
+=========================== */
+
+
+.btn{
+
+    border-radius:12px;
+
+    transition:.3s;
+
+}
+
+
+.btn:hover{
+
+    transform:scale(1.05);
+
+}
+
+
+
+/* ===========================
+   FORM
+=========================== */
+
+
+/* Home Search Form */
+.home-search-form{
+    background:#111827 !important;
+    padding:30px !important;
+    border-radius:20px !important;
+}
+
+
+
+
+.form-control{
+
+
+    background:#334155;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+}
+
+
+.form-control:focus{
+
+
+    background:#475569;
+
+    color:white;
+
+    border:2px solid #38bdf8;
+
+    box-shadow:none;
+
+}
+
+
+
+
+/* ===========================
+ SEARCH AUTOCOMPLETE
+=========================== */
+
+
+.search-box{
+
+    position:relative;
+
+}
+
+
+
+.suggestions-box{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgb(4, 4, 4);
+    z-index: 9999;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+
+
+.suggestion-item{
+
+
+    padding:12px;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+
+}
+
+
+
+.suggestion-item:hover{
+
+
+    background:#334155;
+
+    padding-left:20px;
+
+
+}
+
+/* ===========================
+   MOVIE CARD CONTENT
+=========================== */
+
+
+.movie-card .card-body,
+.movie-glass-card .p-3{
+
+    padding:20px;
+
+}
+
+
+
+.movie-card h5,
+.movie-glass-card h5{
+
+    font-weight:700;
+
+    color:white;
+
+}
+
+
+
+.movie-card p,
+.movie-glass-card p{
+
+    color:#cbd5e1;
+
+    font-size:14px;
+
+}
+
+
+
+
+
+/* ===========================
+   SIMILAR MOVIES CAROUSEL
+=========================== */
+
+
+.similar-scroll{
+
+
+    display:flex;
+
+    gap:15px;
+
+    overflow-x:auto;
+
+    padding:10px 0;
+
+
+}
+
+
+
+.similar-scroll::-webkit-scrollbar{
+
+    height:8px;
+
+}
+
+
+
+.similar-card{
+
+
+    min-width:130px;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:15px;
+
+    padding:10px;
+
+    text-align:center;
+
+    transition:.3s;
+
+
+}
+
+
+
+.similar-card:hover{
+
+
+    transform:scale(1.08);
+
+
+}
+
+
+
+.similar-card img{
+
+
+    width:100%;
+
+    height:160px;
+
+    object-fit:cover;
+
+    border-radius:12px;
+
+
+}
+
+
+
+.similar-card p{
+
+
+    margin-top:8px;
+
+    font-size:13px;
+
+    color:white;
+
+
+}
+
+
+
+
+
+/* ===========================
+   STAR RATING
+=========================== */
+
+
+.stars{
+
+    color:#fbbf24;
+
+    font-size:22px;
+
+    letter-spacing:3px;
+
+
+}
+
+
+
+
+/* ===========================
+   FAVORITE CARD
+=========================== */
+
+
+.favorite-card{
+
+
+    padding:25px;
+
+    min-height:170px;
+
+
+}
+
+
+
+.favorite-card h4{
+
+    font-weight:700;
+
+}
+
+
+
+
+/* ===========================
+   HISTORY CARD
+=========================== */
+
+
+.history-card{
+
+
+    padding:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+
+}
+
+
+
+
+
+/* ===========================
+   TABLE DESIGN
+=========================== */
+
+
+.table{
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+}
+
+
+
+.table th{
+
+
+    background:#111827;
+
+    color:#38bdf8;
+
+}
+
+
+
+.table td{
+
+
+    background:#1e293b;
+
+    color:white;
+
+
+}
+
+
+
+
+
+/* ===========================
+   ALERT
+=========================== */
+
+
+.alert{
+
+    border-radius:15px;
+
+}
+
+
+
+
+
+/* ===========================
+   BUTTON COLORS
+=========================== */
+
+
+.btn-primary{
+
+    background:#2563eb;
+
+    border:none;
+
+
+}
+
+
+
+.btn-primary:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+
+.btn-warning{
+
+
+    background:#f59e0b;
+
+    color:white;
+
+    border:none;
+
+
+}
+
+
+
+.btn-warning:hover{
+
+
+    background:#d97706;
+
+
+}
+
+
+
+.btn-danger:hover,
+.btn-success:hover{
+
+
+    transform:scale(1.08);
+
+
+}
+
+
+
+
+
+/* ===========================
+   HEADINGS
+=========================== */
+
+
+h1,
+h2,
+h3,
+h4,
+h5{
+
+
+    font-weight:700;
+
+    color:white;
+
+
+}
+
+
+
+
+.text-muted{
+
+
+    color:#cbd5e1 !important;
+
+
+}
+
+
+
+
+/* ===========================
+   ANIMATIONS
+=========================== */
+
+
+@keyframes fadeIn{
+
+
+    from{
+
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+
+    }
+
+
+    to{
+
+
+        opacity:1;
+
+        transform:translateY(0);
+
+
+    }
+
+
+}
+
+
+
+.fade-animation{
+
+
+    animation:fadeIn .7s ease;
+
+
+}
+
+
+
+
+@keyframes pulse{
+
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+
+    50%{
+
+        transform:scale(1.03);
+
+    }
+
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+
+}
+
+
+
+.loading{
+
+    animation:pulse 1s infinite;
+
+}
+
+
+
+
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+    background:#111827;
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+    background:#38bdf8;
+
+    border-radius:10px;
+
+
+}
+
+
+
+::-webkit-scrollbar-thumb:hover{
+
+
+    background:#0ea5e9;
+
+
+}
+/* ===========================
+   LIGHT THEME
+=========================== */
+
+
+body.light-mode{
+
+
+    background:#f4f7fb;
+
+    color:#111;
+
+
+}
+
+
+
+body.light-mode .navbar{
+
+
+    background:#2563eb !important;
+
+
+}
+
+
+
+
+body.light-mode .navbar-brand,
+body.light-mode .nav-link{
+
+
+    color:white !important;
+
+
+}
+
+
+
+
+
+body.light-mode .card,
+body.light-mode .movie-card,
+body.light-mode .movie-glass-card,
+body.light-mode .favorite-card,
+body.light-mode .history-card{
+
+
+    background:white;
+
+    color:#111;
+
+    border:1px solid #ddd;
+
+
+}
+
+
+
+
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4,
+body.light-mode h5,
+body.light-mode p,
+body.light-mode b{
+
+
+    color:#111 !important;
+
+
+}
+
+
+
+
+
+body.light-mode .text-muted{
+
+
+    color:#555 !important;
+
+
+}
+
+
+
+
+
+body.light-mode .form-control{
+
+
+    background:#f1f5f9;
+
+    color:#111;
+
+
+}
+
+
+
+
+
+body.light-mode form{
+
+
+    background:white;
+
+}
+
+
+
+
+
+body.light-mode .suggestions-box{
+
+
+    background:white;
+
+
+}
+
+
+
+body.light-mode .suggestion-item{
+
+
+    color:#111;
+
+
+}
+
+
+
+body.light-mode .suggestion-item:hover{
+
+
+    background:#e2e8f0;
+
+
+}
+
+
+
+
+
+
+/* ===========================
+   RESPONSIVE DESIGN
+=========================== */
+
+
+
+@media(max-width:1200px){
+
+
+    .container{
+
+        padding:20px;
+
+    }
+
+
+}
+
+
+
+
+
+@media(max-width:992px){
+
+
+    .navbar-brand{
+
+
+        font-size:24px;
+
+
+    }
+
+
+
+    .movie-image,
+    .movie-card img{
+
+
+        height:300px;
+
+
+    }
+
+
+}
+
+
+
+
+
+@media(max-width:768px){
+
+
+
+    body{
+
+        padding-bottom:20px;
+
+    }
+
+
+
+    .navbar-brand{
+
+
+        font-size:20px;
+
+
+    }
+
+
+
+    .navbar .btn{
+
+
+        width:100%;
+
+        margin-top:10px;
+
+
+    }
+
+
+
+    form{
+
+
+        padding:20px;
+
+
+    }
+
+
+
+
+
+    .movie-image,
+    .movie-card img{
+
+
+        height:250px;
+
+
+    }
+
+
+
+
+
+    .history-card{
+
+
+        flex-direction:column;
+
+        gap:15px;
+
+        align-items:flex-start;
+
+
+    }
+
+
+
+
+
+    .similar-card{
+
+
+        min-width:110px;
+
+
+    }
+
+
+
+
+
+    h1{
+
+
+        font-size:28px;
+
+
+    }
+
+
+
+    h2{
+
+
+        font-size:24px;
+
+
+    }
+
+
+}
+
+
+
+
+
+@media(max-width:480px){
+
+
+
+    .container{
+
+
+        padding:15px;
+
+
+    }
+
+
+
+
+
+    h1{
+
+
+        font-size:24px;
+
+
+    }
+
+
+
+
+    h2{
+
+
+        font-size:20px;
+
+
+    }
+
+
+
+
+
+    .btn{
+
+
+        font-size:14px;
+
+        padding:10px;
+
+
+    }
+
+
+
+
+    .movie-image,
+    .movie-card img{
+
+
+        height:220px;
+
+
+    }
+
+
+
+    .form-control{
+
+
+        height:45px;
+
+
+        font-size:14px;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+/* ===========================
+   SMOOTH SCROLL
+=========================== */
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+
+
+/* ===========================
+   PAGE TRANSITION
+=========================== */
+
+
+.page-animation{
+
+
+    animation:fadeIn .7s ease;
+
+
+}
+/* LOGIN + REGISTER ONLY */
+
+.auth-page{
+    min-height:100vh;
+    width:100vw;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background-image:url("/static/images/login-bg.jpg");
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+}
+
+
+
+.auth-box{
+
+    width:400px;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    background:rgba(0,0,0,0.55);
+
+    backdrop-filter:blur(10px);
+
+}
+.recommend-btn{
+    background:#e50914;
+    border:none;
+    color:white;
+    font-weight:bold;
+    border-radius:12px;
+}
+
+.recommend-btn:hover{
+    background:#b20710;
+    color:white;
+}

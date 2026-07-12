@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+
+{% block title %}Favorites{% endblock %}
+
+
+{% block content %}
+
+<div class="container mt-4">
+
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+
+        <h2>
+            ❤️ Favorite Movies
+        </h2>
+
+
+        <a href="/" class="btn btn-secondary">
+            ⬅ Home
+        </a>
+
+
+    </div>
+
+
+
+
+
+    {% if movies %}
+
+
+    <div class="row">
+
+
+
+    {% for movie in movies %}
+
+
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+
+
+            <div class="favorite-card">
+
+
+
+                <div class="favorite-content">
+
+
+                    <h4>
+
+                        🎬 {{ movie.movie }}
+
+                    </h4>
+
+
+                    <p class="text-muted">
+
+                        Added to your favorites
+
+                    </p>
+
+
+                </div>
+
+
+
+
+
+                <a href="/remove-favorite/{{ movie.movie }}"
+                   class="btn btn-danger w-100"
+                   onclick="return confirm('Remove this movie from favorites?')">
+
+
+                    ❌ Remove Favorite
+
+
+                </a>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    {% endfor %}
+
+
+
+    </div>
+
+
+
+    {% else %}
+
+
+
+    <div class="alert alert-info">
+
+        No favorite movies found.
+
+    </div>
+
+
+
+    {% endif %}
+
+
+
+
+</div>
+
+
+
+
+
+
+<style>
+
+
+.favorite-card{
+
+
+    padding:25px;
+
+
+    border-radius:20px;
+
+
+    background:rgba(255,255,255,0.15);
+
+
+    backdrop-filter:blur(12px);
+
+
+    box-shadow:0 8px 25px rgba(0,0,0,0.2);
+
+
+    transition:0.4s;
+
+
+}
+
+
+
+.favorite-card:hover{
+
+
+    transform:translateY(-8px);
+
+
+}
+
+
+
+.favorite-content{
+
+
+    min-height:100px;
+
+
+}
+
+
+
+.favorite-card h4{
+
+
+    font-weight:700;
+
+
+}
+
+
+
+@media(max-width:768px){
+
+
+.favorite-card{
+
+
+    padding:20px;
+
+
+}
+
+
+}
+
+
+</style>
+
+
+
+{% endblock %}

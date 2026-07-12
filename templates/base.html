@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>
+        {% block title %}
+        AI Movie Recommendation
+        {% endblock %}
+    </title>
+
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+{% if request.endpoint not in ['login','register'] %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+<div class="container">
+
+
+<a class="navbar-brand fw-bold" href="/">
+🎬 AI Movie Recommendation
+</a>
+
+
+
+<button class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+
+
+<div class="collapse navbar-collapse"
+     id="navbarMenu">
+
+
+{% if session.get("username") %}
+
+
+<div class="ms-auto mt-3 mt-lg-0">
+
+
+<button id="themeBtn"
+        class="btn btn-outline-light me-2">
+🌙
+</button>
+
+
+<a href="/"
+   class="btn btn-outline-light me-2">
+🏠 Home
+</a>
+
+
+<a href="/dashboard"
+   class="btn btn-outline-primary me-2">
+📊 Dashboard
+</a>
+
+
+<a href="/favorites"
+   class="btn btn-outline-warning me-2">
+❤️ Favorites
+</a>
+
+
+<a href="/history"
+   class="btn btn-outline-info me-2">
+🕒 History
+</a>
+
+
+<a href="/profile"
+   class="btn btn-outline-success me-2">
+👤 Profile
+</a>
+
+
+<a href="/logout"
+   class="btn btn-danger">
+Logout
+</a>
+
+
+</div>
+
+
+{% endif %}
+
+
+</div>
+
+
+</div>
+
+</nav>
+
+{% endif %}
+
+
+
+<!-- ================= FLASH MESSAGE ================= -->
+
+
+<div class="container mt-3">
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+
+{% if messages %}
+
+
+{% for category, message in messages %}
+
+
+<div class="alert alert-{{ category }} alert-dismissible fade show">
+
+
+{{ message }}
+
+
+<button type="button"
+        class="btn-close"
+        data-bs-dismiss="alert">
+
+</button>
+
+
+</div>
+
+
+{% endfor %}
+
+
+{% endif %}
+
+
+{% endwith %}
+
+
+</div>
+
+
+<!-- ================= MAIN CONTENT ================= -->
+
+
+{% if request.endpoint in ['login','register'] %}
+
+<div class="auth-page">
+
+{% else %}
+
+<div class="container mt-4 page-animation">
+
+{% endif %}
+
+
+{% block content %}
+{% endblock %}
+
+
+</div>
+
+
+
+
+<!-- ================= FOOTER ================= -->
+
+
+<footer>
+
+<p>
+
+🎬 AI Movie Recommendation System
+
+<br>
+
+Powered by Flask + Python + TMDB API
+
+</p>
+
+</footer>
+
+
+
+
+
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+
+</script>
+
+
+
+
+<!-- Custom JS -->
+
+<script src="{{ url_for('static', filename='js/script.js') }}">
+
+</script>
+
+
+
+
+
+
+<!-- Theme Script -->
+
+
+<script>
+
+
+const themeBtn = document.getElementById("themeBtn");
+
+
+if(localStorage.getItem("theme") === "light"){
+
+
+document.body.classList.add("light-mode");
+
+
+if(themeBtn){
+
+themeBtn.innerHTML="☀️";
+
+}
+
+}
+
+
+
+if(themeBtn){
+
+
+themeBtn.addEventListener("click",function(){
+
+
+document.body.classList.toggle("light-mode");
+
+
+
+if(document.body.classList.contains("light-mode")){
+
+
+localStorage.setItem(
+"theme",
+"light"
+);
+
+
+themeBtn.innerHTML="☀️";
+
+
+}
+
+else{
+
+
+localStorage.setItem(
+"theme",
+"dark"
+);
+
+
+themeBtn.innerHTML="🌙";
+
+
+}
+
+
+});
+
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
