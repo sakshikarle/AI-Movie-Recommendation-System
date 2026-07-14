@@ -3,8 +3,8 @@ class Config:
     # Flask Secret Key
     SECRET_KEY = "movie_ai_secret_key"
 
-    # MongoDB Configuration
-    MONGO_URI = "mongodb://localhost:27017"
+    # MongoDB Atlas Configuration
+    MONGO_URI = "mongodb+srv://movieadmin:movie123@cluster0.fcdygaf.mongodb.net/movie_recommendation?retryWrites=true&w=majority&appName=Cluster0"
     DATABASE_NAME = "movie_recommendation"
 
     # TMDB API Key
