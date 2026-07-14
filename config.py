@@ -9,7 +9,6 @@ class Config:
 
     # TMDB API Key
     TMDB_API_KEY = "48b79977ecfca05dd1e05d036205791a"
-
     # Model Files
     MODEL_PATH = "model/similarity.pkl"
     MOVIES_PATH = "model/movies.pkl"

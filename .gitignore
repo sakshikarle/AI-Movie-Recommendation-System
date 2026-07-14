@@ -23,5 +23,3 @@ Thumbs.db
 # Logs
 *.log
 
-model/similarity.pkl
-model/movies.pkl
