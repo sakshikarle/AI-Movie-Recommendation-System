@@ -25,7 +25,7 @@ def get_movie_details(movie_name):
         response = requests.get(
             url,
             params=params,
-            timeout=10
+            timeout=5
         )
 
         if response.status_code != 200:

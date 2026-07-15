@@ -230,17 +230,19 @@ def recommendation():
     })
 
 
+movie_details = []
 
-    movie_details = []
 
+for movie in recommended_movies[:5]:
 
-    for movie in recommended_movies:
-
+    try:
         details = get_movie_details(movie)
 
         if details:
-
             movie_details.append(details)
+
+    except Exception as e:
+        print("TMDB ERROR:", e)
 
 
 
