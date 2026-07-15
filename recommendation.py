@@ -1,6 +1,6 @@
 import pickle
 
-from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import linear_kernel
 
 
 movies = pickle.load(
@@ -33,11 +33,10 @@ def recommend(movie_name):
 
     index = match.index[0]
 
-    similarity = cosine_similarity(
-        vectors[index],
-        vectors
+    similarity = linear_kernel(
+    vectors[index],
+    vectors
     ).flatten()
-
 
     movies_list = sorted(
         enumerate(similarity),
