@@ -8,336 +8,221 @@
 <div class="container mt-4">
 
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex justify-content-between align-items-center mb-4">
 
-        <h2>
-            🤖 AI Recommendations
-        </h2>
+<h2>
+🤖 AI Recommendations
+</h2>
 
 
-        <a href="/" class="btn btn-secondary">
-            ⬅ Back to Home
-        </a>
+<a href="/" class="btn btn-secondary">
+⬅ Back to Home
+</a>
 
-    </div>
+</div>
 
 
 
+{% if searched_movie %}
 
-    {% if searched_movie %}
+<h4 class="mb-4">
 
-    <h4 class="mb-4">
+Results for
 
-        Results for
+<span class="text-primary">
+{{ searched_movie }}
+</span>
 
-        <span class="text-primary">
-            {{ searched_movie }}
-        </span>
+</h4>
 
-    </h4>
+{% endif %}
 
-    {% endif %}
 
 
 
+<div class="row">
 
 
-    <div class="row">
+{% for movie in movie_details %}
 
 
-    {% for movie in movie_details %}
+<div class="col-lg-4 col-md-6 mb-4">
 
 
-        <div class="col-lg-4 col-md-6 mb-4">
+<div class="movie-card h-100">
 
 
 
-            <div class="movie-card h-100">
+{% if movie.poster %}
 
+<img
+src="{{ movie.poster }}"
+class="movie-poster"
+alt="{{ movie.title }}">
 
+{% endif %}
 
-                {% if movie.poster %}
 
 
-                <img
-                src="{{ movie.poster }}"
-                class="movie-poster"
-                alt="{{ movie.title }}">
 
+<div class="movie-content">
 
 
-                {% endif %}
+<h4 class="fw-bold">
+{{ movie.title }}
+</h4>
 
 
 
+<p>
 
-                <div class="movie-content">
+<b>⭐ Rating :</b>
 
+{{ movie.rating }}/10
 
+</p>
 
-                    <h4 class="fw-bold">
 
-                        {{ movie.title }}
 
-                    </h4>
+<div class="stars mb-2">
 
 
+{% if movie.rating %}
 
+{% for i in range(1,6) %}
 
-                    {% if movie.similarity %}
 
+{% if movie.rating|float >= i*2 %}
 
-                    <p class="text-success fw-bold">
+⭐
 
-                        🤖 AI Match :
-                        {{ movie.similarity }}%
+{% else %}
 
-                    </p>
+☆
 
+{% endif %}
 
-                    {% endif %}
 
+{% endfor %}
 
-
-
-
-                    <p>
-
-                        <b>⭐ Rating :</b>
-
-                        {{ movie.rating }}/10
-
-
-                    </p>
-
-
-                    <div class="stars mb-2">
-
-
-                    {% for i in range(1,6) %}
-
-
-                        {% if movie.rating >= i*2 %}
-
-                        ⭐
-
-
-                        {% else %}
-
-                        ☆
-
-
-                        {% endif %}
-
-
-                    {% endfor %}
-
-
-                    </div>
-                                        
-                    <p>
-
-                        <b>📅 Release :</b>
-
-                        {{ movie.release_date }}
-
-                    </p>
-
-
-
-
-                    {% if movie.director %}
-
-                    <p>
-
-                        <b>🎬 Director :</b>
-
-                        {{ movie.director }}
-
-                    </p>
-
-
-                    {% endif %}
-
-
-
-
-
-                    {% if movie.cast %}
-
-
-                    <p>
-
-                        <b>🎭 Cast :</b>
-
-                    </p>
-
-
-                    <div class="small text-muted">
-
-
-                    {% for actor in movie.cast %}
-
-
-                        <span class="badge bg-dark me-1 mb-1">
-
-                            {{ actor.name }}
-
-                        </span>
-
-
-                    {% endfor %}
-
-
-                    </div>
-
-
-                    {% endif %}
-
-
-
-
-
-
-                    <p class="mt-3">
-
-
-                        {{ movie.overview[:180] }}...
-
-
-                    </p>
-
-
-
-
-
-
-                    {% if movie.trailer %}
-
-
-                    <a href="{{ movie.trailer }}"
-                       target="_blank"
-                       class="btn btn-danger w-100 mb-2">
-
-
-                        ▶ Watch Trailer
-
-
-                    </a>
-
-
-                    {% endif %}
-
-
-
-
-
-                    <a href="/favorite/{{ movie.title }}"
-                       class="btn btn-warning w-100">
-
-
-                        ❤️ Add to Favorites
-
-
-                    </a>
-
-
-
-
-                </div>
-
-
-            </div>
-
-
-
-
-            <!-- Similar Movies Carousel -->
-
-
-            {% if movie.similar_movies %}
-
-
-            <div class="mt-4">
-
-
-                <h5>
-
-                    🎞 Similar Movies
-
-                </h5>
-
-
-
-                <div class="similar-scroll">
-
-
-
-                {% for similar in movie.similar_movies %}
-
-
-                    <div class="similar-card">
-
-
-
-                        {% if similar.poster %}
-
-
-                        <img src="{{ similar.poster }}">
-
-
-                        {% endif %}
-
-
-
-
-                        <p>
-
-                            {{ similar.title }}
-
-                        </p>
-
-
-                        <small>
-
-                            ⭐ {{ similar.rating }}
-
-                        </small>
-
-
-
-                    </div>
-
-
-
-                {% endfor %}
-
-
-                </div>
-
-
-
-            </div>
-
-
-            {% endif %}
-
-
-
-
-
-        </div>
-
-
-    {% endfor %}
-
-
-
-    </div>
+{% endif %}
 
 
 </div>
 
+
+
+
+<p>
+
+<b>📅 Release :</b>
+
+{{ movie.release_date }}
+
+</p>
+
+
+
+
+{% if movie.director %}
+
+<p>
+
+<b>🎬 Director :</b>
+
+{{ movie.director }}
+
+</p>
+
+{% endif %}
+
+
+
+
+{% if movie.cast %}
+
+<p>
+
+<b>🎭 Cast :</b>
+
+</p>
+
+
+<div>
+
+
+{% for actor in movie.cast %}
+
+<span class="badge bg-dark me-1">
+
+{{ actor.name }}
+
+</span>
+
+
+{% endfor %}
+
+
+</div>
+
+
+{% endif %}
+
+
+
+
+<p class="mt-3">
+
+{{ movie.overview[:180] }}...
+
+</p>
+
+
+
+
+{% if movie.trailer %}
+
+
+<a href="{{ movie.trailer }}"
+target="_blank"
+class="btn btn-danger w-100 mb-2">
+
+▶ Watch Trailer
+
+</a>
+
+
+{% endif %}
+
+
+
+
+<a href="/favorite/{{ movie.title }}"
+class="btn btn-warning w-100">
+
+❤️ Add to Favorites
+
+</a>
+
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+{% endfor %}
+
+
+</div>
+
+
+</div>
 
 
 
@@ -347,24 +232,22 @@
 
 .movie-card{
 
-    background: linear-gradient(
-        145deg,
-        rgba(20,20,40,0.95),
-        rgba(45,45,70,0.95)
-    );
+background:linear-gradient(
+145deg,
+rgba(20,20,40,0.95),
+rgba(45,45,70,0.95)
+);
 
-    color:white;
+color:white;
 
-    backdrop-filter: blur(15px);
+border-radius:20px;
 
-    border-radius:20px;
+overflow:hidden;
 
-    overflow:hidden;
+box-shadow:
+0 8px 25px rgba(0,0,0,0.35);
 
-    box-shadow:
-    0 8px 25px rgba(0,0,0,0.35);
-
-    transition:0.4s;
+transition:.4s;
 
 }
 
@@ -372,18 +255,27 @@
 
 .movie-card:hover{
 
-    transform:translateY(-10px);
-
-    box-shadow:
-    0 15px 35px rgba(0,0,0,0.5);
+transform:translateY(-10px);
 
 }
 
 
 
-.movie-content h4{
+.movie-poster{
 
-    color:#ffffff;
+width:100%;
+
+height:350px;
+
+object-fit:cover;
+
+}
+
+
+
+.movie-content{
+
+padding:20px;
 
 }
 
@@ -391,96 +283,15 @@
 
 .movie-content p{
 
-    color:#e0e0e0;
+color:#e0e0e0;
 
 }
-
 
 
 
 .stars{
 
-
-    font-size:22px;
-
-
-}
-
-
-
-
-.similar-scroll{
-
-
-    display:flex;
-
-    gap:15px;
-
-    overflow-x:auto;
-
-    padding-bottom:10px;
-
-
-}
-
-
-
-.similar-card{
-
-
-    min-width:120px;
-
-    background:white;
-
-    border-radius:12px;
-
-    padding:8px;
-
-    text-align:center;
-
-    transition:0.3s;
-
-
-}
-
-
-
-.similar-card:hover{
-
-
-    transform:scale(1.05);
-
-
-}
-
-
-
-.similar-card img{
-
-
-    width:100%;
-
-    height:150px;
-
-    object-fit:cover;
-
-    border-radius:10px;
-
-
-}
-
-
-
-
-@media(max-width:768px){
-
-
-.movie-poster{
-
-    height:300px;
-
-}
-
+font-size:22px;
 
 }
 
