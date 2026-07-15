@@ -229,56 +229,39 @@ body{
  SEARCH AUTOCOMPLETE
 =========================== */
 
-
 .search-box{
-
     position:relative;
-
 }
-
 
 
 .suggestions-box{
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: rgb(4, 4, 4);
-    z-index: 9999;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    overflow: hidden;
-    display: none;
-    max-height: 300px;
-    overflow-y: auto;
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    background:#0f172a;
+    z-index:1000;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.4);
+    overflow:hidden;
 }
-
 
 
 .suggestion-item{
-
-
     padding:12px;
-
-    color:white;
-
+    color:#ffffff !important;
+    background:#0f172a;
     cursor:pointer;
-
-    transition:.3s;
-
-
+    transition:0.3s;
+    font-size:15px;
 }
 
 
-
 .suggestion-item:hover{
-
-
-    background:#334155;
-
+    background:#2563eb;
+    color:white;
     padding-left:20px;
-
-
 }
 
 /* ===========================

@@ -1,118 +1,89 @@
 import pandas as pd
 import pickle
 import ast
+
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 
-print("Loading TMDB dataset...")
+print("Loading dataset...")
 
-# Load datasets
 movies = pd.read_csv("dataset/tmdb_5000_movies.csv")
 credits = pd.read_csv("dataset/tmdb_5000_credits.csv")
 
-# Merge datasets
 movies = movies.merge(credits, on="title")
 
-# Keep only required columns
-movies = movies[
-    [
-        "title",
-        "overview",
-        "genres",
-        "keywords",
-        "cast",
-        "crew"
-    ]
-]
+movies = movies[[
+    "movie_id",
+    "title",
+    "overview",
+    "genres",
+    "keywords",
+    "cast",
+    "crew"
+]]
 
-# Fill missing values
-movies.fillna("", inplace=True)
+def convert(obj):
+    L = []
+    for i in ast.literal_eval(obj):
+        L.append(i["name"])
+    return L
 
+def convert_cast(obj):
+    L = []
+    counter = 0
+    for i in ast.literal_eval(obj):
+        if counter != 3:
+            L.append(i["name"])
+            counter += 1
+        else:
+            break
+    return L
 
-# Convert genres and keywords
-def convert(text):
-    result = []
+def fetch_director(obj):
+    L = []
+    for i in ast.literal_eval(obj):
+        if i["job"] == "Director":
+            L.append(i["name"])
+    return L
 
-    try:
-        data = ast.literal_eval(text)
+movies.dropna(inplace=True)
 
-        for item in data:
-            result.append(item["name"])
-
-    except:
-        pass
-
-    return " ".join(result)
-
-
-# Get first 3 cast members
-def fetch_cast(text):
-    result = []
-
-    try:
-        data = ast.literal_eval(text)
-
-        for item in data[:3]:
-            result.append(item["name"])
-
-    except:
-        pass
-
-    return " ".join(result)
-
-
-# Get director name
-def fetch_director(text):
-
-    result = ""
-
-    try:
-        data = ast.literal_eval(text)
-
-        for item in data:
-
-            if item["job"] == "Director":
-                result = item["name"]
-                break
-
-    except:
-        pass
-
-    return result
-
-# Apply functions
 movies["genres"] = movies["genres"].apply(convert)
 movies["keywords"] = movies["keywords"].apply(convert)
-movies["cast"] = movies["cast"].apply(fetch_cast)
-movies["director"] = movies["crew"].apply(fetch_director)
+movies["cast"] = movies["cast"].apply(convert_cast)
 movies["crew"] = movies["crew"].apply(fetch_director)
 
+movies["overview"] = movies["overview"].apply(lambda x: x.split())
 
-# Create content
-movies["content"] = (
-    movies["overview"].astype(str) + " " +
-    movies["genres"].astype(str) + " " +
-    movies["keywords"].astype(str) + " " +
-    movies["cast"].astype(str) + " " +
-    movies["director"].astype(str)
+for col in ["genres","keywords","cast","crew"]:
+    movies[col] = movies[col].apply(
+        lambda x:[i.replace(" ","") for i in x]
+    )
+
+movies["tags"] = (
+    movies["overview"]
+    + movies["genres"]
+    + movies["keywords"]
+    + movies["cast"]
+    + movies["crew"]
 )
 
-print("Creating TF-IDF vectors...")
+new_df = movies[["movie_id","title","tags"]]
 
-tfidf = TfidfVectorizer(
-    stop_words="english",
-    max_features=8000,
-    ngram_range=(1,2)
-)
+new_df["tags"] = new_df["tags"].apply(lambda x:" ".join(x).lower())
+print("Creating TF-IDF...")
 
-vectors = tfidf.fit_transform(movies["content"])
+tfidf = TfidfVectorizer(stop_words="english")
 
-print("Calculating similarity...")
+vectors = tfidf.fit_transform(new_df["tags"])
 
-similarity = cosine_similarity(vectors)
+print("Saving files...")
 
-# Save model
-pickle.dump(movies, open("model/movies.pkl", "wb"))
-pickle.dump(similarity, open("model/similarity.pkl", "wb"))
+with open("model/movies.pkl", "wb") as f:
+    pickle.dump(new_df, f)
 
-print("✅ Model Trained Successfully")
+with open("model/tfidf.pkl", "wb") as f:
+    pickle.dump((tfidf, vectors), f)
+
+print("Movies file size saved")
+print("TF-IDF file saved")
+print("Done!")

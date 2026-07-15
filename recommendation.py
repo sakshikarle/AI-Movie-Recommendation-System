@@ -1,63 +1,56 @@
 import pickle
 
-movies = pickle.load(open("model/movies.pkl", "rb"))
-similarity = pickle.load(open("model/similarity.pkl", "rb"))
+from sklearn.metrics.pairwise import cosine_similarity
+
+
+movies = pickle.load(
+    open("model/movies.pkl","rb")
+)
+
+tfidf, vectors = pickle.load(
+    open("model/tfidf.pkl","rb")
+)
 
 
 def recommend(movie_name):
 
     movie_name = movie_name.lower().strip()
 
-    # Exact match first
-    exact_match = movies[
+    match = movies[
         movies["title"].str.lower() == movie_name
     ]
 
-    if not exact_match.empty:
-        index = exact_match.index[0]
+    if match.empty:
 
-    else:
-        # Partial match
-        matches = movies[
-            movies["title"].str.lower().str.contains(movie_name, regex=False)
+        match = movies[
+            movies["title"]
+            .str.lower()
+            .str.contains(movie_name)
         ]
 
-        if matches.empty:
-            return None
+        if match.empty:
+            return []
 
-        index = matches.index[0]
+    index = match.index[0]
+
+    similarity = cosine_similarity(
+        vectors[index],
+        vectors
+    ).flatten()
 
 
-    distances = list(enumerate(similarity[index]))
+    movies_list = sorted(
+        enumerate(similarity),
+        reverse=True,
+        key=lambda x: x[1]
+    )[1:11]
 
-    distances = sorted(
-        distances,
-        key=lambda x: x[1],
-        reverse=True
-    )
 
-    recommended_movies = []
+    result = []
 
-    for i in distances[1:]:
+    for i in movies_list:
+        result.append(
+            movies.iloc[i[0]]["title"]
+        )
 
-        title = movies.iloc[i[0]].title
-
-        # 👇 हे print add कर
-        print("Recommended Title:", title)
-
-        match_percentage = round(i[1] * 100, 2)
-
-        if title not in [movie["title"] for movie in recommended_movies]:
-
-            recommended_movies.append({
-                "title": title,
-                "similarity": match_percentage
-            })
-
-        if len(recommended_movies) == 10:
-            break
-
-    # 👇 हे पण add कर
-    print("Final Recommendations:", recommended_movies)
-
-    return recommended_movies
+    return result

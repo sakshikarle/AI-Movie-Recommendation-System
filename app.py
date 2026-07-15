@@ -234,24 +234,13 @@ def recommendation():
     movie_details = []
 
 
-
     for movie in recommended_movies:
 
-
-        details = get_movie_details(
-            movie["title"]
-        )
-
+        details = get_movie_details(movie)
 
         if details:
 
-
-            details["similarity"] = movie["similarity"]
-
-
-            movie_details.append(
-                details
-            )
+            movie_details.append(details)
 
 
 
@@ -268,6 +257,9 @@ def recommendation():
         searched_movie=movie_name
 
     )
+
+        
+    
 # ==========================
 # MOVIE DETAILS PAGE
 # ==========================
